@@ -14,10 +14,10 @@ import java.util.WeakHashMap;
 
 public class DiContainer {
     /**
-    * An Annotation to mark the Field to be injected by the Container
+    * An Annotation to mark the Field to be injected by the Container <br><br><br><br>
     *
-    * @param id The optional Id of the instance
-    * @param optional Whetheher or not injecting the field is mandatory or not
+    * <b>id</b>: The optional Id of the instance <br><br>
+    * <b>optional</b>: Whetheher or not injecting the field is mandatory or not <br><br>
     * @see DiContainer
     */
     @Retention(RetentionPolicy.RUNTIME)
@@ -97,7 +97,7 @@ public class DiContainer {
     * @return All objects valid for the Context
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiContainer
     */
     protected List<Object> resolveAll(Class<?> searchClass, DiContext context) throws IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -125,7 +125,7 @@ public class DiContainer {
     * @return A single object valid for the Context
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @throws DiExceptions.MultipleInstancesFoundException Caused if multiple instances are found
     * @throws DiExceptions.InstanceNotFoundException Caused if no instances are found
     * @see DiContainer
@@ -147,7 +147,7 @@ public class DiContainer {
     * @return The instantiated and injected object
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiContainer
     */
     protected Object instantiate(Class<?> inClass, DiContext context) throws IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -174,7 +174,7 @@ public class DiContainer {
     * @return The injected object
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiContainer
     */
     protected Object inject(Object instance, DiContext context) throws IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -214,7 +214,7 @@ public class DiContainer {
     * @return The injected object
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiContainer
     */
     public Object inject(Object instance) throws IllegalAccessException, InstantiationException, InvocationTargetException {
@@ -230,7 +230,7 @@ public class DiContainer {
     * @return The new object instance
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiContainer
     */
     public Object instantiate(Class<?> inClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
@@ -246,7 +246,7 @@ public class DiContainer {
     * @return The instance of the class
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiContainer
     */
     public Object resolve(Class<?> searchClass) throws IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -263,7 +263,7 @@ public class DiContainer {
     * @return The instance of the class
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiContainer
     */
     public Object resolveId(Class<?> searchClass, String id) throws IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -279,7 +279,7 @@ public class DiContainer {
     * @return The instance of the class
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiContainer
     */
     public List<Object> resolveAll(Class<?> searchClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
@@ -378,7 +378,7 @@ public class DiContainer {
     * @return A new RuleBuilder 
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiRule
     */
     public DiRuleBuilder bindInterfacesTo(Class<?> inClass) throws IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -396,7 +396,7 @@ public class DiContainer {
     * @return A new RuleBuilder 
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiRule
     */
     public DiRuleBuilder bindInterfacesAndSelfTo(Class<?> inClass) throws IllegalAccessException, InvocationTargetException, InstantiationException {

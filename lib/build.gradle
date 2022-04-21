@@ -9,6 +9,8 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
 repositories {
@@ -30,4 +32,83 @@ dependencies {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+group = "com.fizzyapple12.javadi"
+archivesBaseName = "javadi"
+version = "1.0.0"
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId = 'javadi'
+            from components.java
+
+            pom {
+                name = 'javadi'
+                packaging = 'jar'
+                // optionally artifactId can be defined here
+                description = 'A lightweight and simple dependency injection framework for java'
+                url = 'https://github.com/FizzyApple12/javadi'
+
+                scm {
+                    connection = 'scm:git:https://github.com/FizzyApple12/javadi.git'
+                    developerConnection = 'scm:git:https://github.com/FizzyApple12/javadi.git'
+                    url = 'https://github.com/FizzyApple12/javadi'
+                }
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'FizzyApple12'
+                        name = 'Hazel Roeder'
+                        email = 'davideroeder@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            def releasesRepoUrl = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            def snapshotsRepoUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+            
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.maven
 }

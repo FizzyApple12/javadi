@@ -89,7 +89,7 @@ public class DiRule {
     * @return The object instance this Rule grabs
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @throws DiExceptions.IncompleteBindingException Caused if the rule was never configured
     * @see DiContainer
     */

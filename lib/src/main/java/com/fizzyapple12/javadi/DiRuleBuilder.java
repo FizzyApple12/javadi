@@ -92,7 +92,7 @@ public class DiRuleBuilder {
     * @return A new RuleBuilder 
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiRule
     */
     public DiRuleBuilder bindInterfacesTo(Class<?> inClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
@@ -112,7 +112,7 @@ public class DiRuleBuilder {
     * @return A new RuleBuilder 
     * @throws IllegalAccessException Can be caused by the reflection, out of my control
     * @throws InvocationTargetException Can be caused by the reflection, out of my control
-    * @throws InstantiateException Can be caused if the Container fails to instantiate a class
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiRule
     */
     public DiRuleBuilder bindInterfacesAndSelfTo(Class<?> inClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
@@ -133,6 +133,9 @@ public class DiRuleBuilder {
     *
     * @return A new RuleBuilder 
     * @throws DiExceptions.RuleBuilderException Caused by having an improper configuration prior to trying to set resolution
+    * @throws IllegalAccessException Can be caused by the reflection, out of my control
+    * @throws InvocationTargetException Can be caused by the reflection, out of my control
+    * @throws InstantiationException Can be caused if the Container fails to instantiate a class
     * @see DiRule
     */
     public DiRuleBuilder asSingle() throws IllegalAccessException, InvocationTargetException, InstantiationException {
