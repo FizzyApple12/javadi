@@ -133,8 +133,8 @@ public class DiContainer {
     protected Object resolve(Class<?> searchClass, DiContext context) throws IllegalAccessException, InstantiationException, InvocationTargetException {
         List<Object> values = this.resolveAll(searchClass, context);
 
-        if (values.size() > 1) throw new DiExceptions.MultipleInstancesFoundException();
-        if (values.size() < 1) throw new DiExceptions.InstanceNotFoundException();
+        if (values.size() > 1) throw new DiExceptions.MultipleInstancesFoundException(searchClass, context, rules, objectPool);
+        if (values.size() < 1) throw new DiExceptions.InstanceNotFoundException(searchClass, context, rules, objectPool);
 
         return values.get(0);
     }

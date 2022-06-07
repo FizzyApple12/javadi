@@ -29,7 +29,7 @@ public class DiRuleBuilder {
     * @see DiRule
     */
     public DiRuleBuilder bind(Class<?>... inClasses) {
-        if (this.bindDone) throw new DiExceptions.RuleBuilderException();
+        if (this.bindDone) throw new DiExceptions.RuleBuilderException("Tried to bind classes to a rule which has already been completed.");
 
         for (Class<?> inClass : inClasses) {
             DiRule rule = new DiRule(this.container, inClass);
@@ -64,7 +64,7 @@ public class DiRuleBuilder {
     * @see DiRule
     */
     public DiRuleBuilder bindInstances(Object... instances) {
-        if (this.bindDone || this.resolutionSet) throw new DiExceptions.RuleBuilderException();
+        if (this.bindDone || this.resolutionSet) throw new DiExceptions.RuleBuilderException("Tried to bind instances to a rule which has already been completed.");
 
         this.bindDone = true;
         this.resolutionSet = true;
@@ -139,7 +139,7 @@ public class DiRuleBuilder {
     * @see DiRule
     */
     public DiRuleBuilder asSingle() throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        if (this.resolutionSet) throw new DiExceptions.RuleBuilderException();
+        if (this.resolutionSet) throw new DiExceptions.RuleBuilderException("Tried to set the resolution mode of a completed rule to single.");
         
 
         this.resolutionSet = true;
@@ -169,7 +169,7 @@ public class DiRuleBuilder {
     * @see DiRule
     */
     public DiRuleBuilder asTransient() {
-        if (this.resolutionSet) throw new DiExceptions.RuleBuilderException();
+        if (this.resolutionSet) throw new DiExceptions.RuleBuilderException("Tried to set the resolution mode of a completed rule to transient.");
 
         this.resolutionSet = true;
 
@@ -201,7 +201,7 @@ public class DiRuleBuilder {
     * @see DiRule
     */
     public DiRuleBuilder to(Class<?> inClass) {
-        if (this.target != null) throw new DiExceptions.RuleBuilderException();
+        if (this.target != null) throw new DiExceptions.RuleBuilderException("Tried to bind to classes on a rule which has been completed.");
 
         this.target = inClass;
 
@@ -218,7 +218,7 @@ public class DiRuleBuilder {
     */
     public DiRuleBuilder fromInstance(Object instance) {
         if (this.resolutionSet) {
-            throw new DiExceptions.RuleBuilderException();
+            throw new DiExceptions.RuleBuilderException("Tried to set the resolution mode of a completed rule to an instance.");
         }
 
         this.resolutionSet = true;

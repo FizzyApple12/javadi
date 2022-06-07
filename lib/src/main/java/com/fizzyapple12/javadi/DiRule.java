@@ -38,7 +38,7 @@ public class DiRule {
     * @see DiContainer
     */
     protected void setupResolve(Class<?> instanceClassIn) {
-        if (this.targetClass == instanceClassIn) throw new DiExceptions.IncompleteBindingException();
+        if (this.targetClass == instanceClassIn) throw new DiExceptions.IncompleteBindingException(this, true);
 
         this.instanceClass = instanceClassIn;
         this.retrievalMode = RetrievalMode.Resolve;
@@ -111,7 +111,7 @@ public class DiRule {
                 break;
         }
 
-        throw new DiExceptions.IncompleteBindingException();
+        throw new DiExceptions.IncompleteBindingException(this, false);
     }
 
     protected enum RetrievalMode {
