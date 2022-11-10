@@ -96,19 +96,20 @@ publishing {
 
     repositories {
         maven {
-            def releasesRepoUrl = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-            def snapshotsRepoUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
 
             credentials {
                 username = System.getenv("MAVEN_PASSWORD")
                 password = System.getenv("MAVEN_USERNAME")
             }
-            
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
         }
     }
 }
 
 signing {
     sign publishing.publications.maven
+    useInMemoryPgpKeys(
+        System.getenv('SIGNING_SECRET_KEY'),
+        System.getenv('SIGNING_PASSWORD')
+    )
 }
