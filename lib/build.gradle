@@ -70,14 +70,6 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
-            from(components.java)
-        }
-    }
-}
-
-/*publishing {
-    publications {
-        maven(MavenPublication) {
             artifactId = 'javadi'
             from components.java
 
@@ -111,18 +103,7 @@ publishing {
             }
         }
     }
-
-    repositories {
-        maven {
-            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-
-            credentials {
-                username = System.getenv("GITHUB_PASSWORD")
-                password = System.getenv("GITHUB_USERNAME")
-            }
-        }
-    }
-}*/
+}
 
 signing {
     sign publishing.publications.gpr
