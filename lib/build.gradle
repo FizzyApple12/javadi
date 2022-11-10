@@ -55,7 +55,7 @@ java {
 
 group = "com.fizzyapple12.javadi"
 archivesBaseName = "javadi"
-version = "1.2.5"
+version = "1.2.6"
 
 publishing {
     repositories {
@@ -125,7 +125,7 @@ publishing {
 }*/
 
 signing {
-    sign publishing.publications.maven
+    sign publishing.publications.gpr
     useInMemoryPgpKeys(
         System.getenv('SIGNING_SECRET_KEY'),
         System.getenv('SIGNING_PASSWORD')
