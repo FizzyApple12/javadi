@@ -122,7 +122,7 @@ publishing {
             }
         }
     }
-}
+}*/
 
 signing {
     sign publishing.publications.maven
@@ -130,4 +130,4 @@ signing {
         System.getenv('SIGNING_SECRET_KEY'),
         System.getenv('SIGNING_PASSWORD')
     )
-}*/
+}

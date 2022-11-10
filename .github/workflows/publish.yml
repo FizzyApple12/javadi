@@ -21,3 +21,5 @@ jobs:
         env:
           SECRET_USERNAME: ${{ secrets.SECRET_USERNAME }}
           SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_SECRET_KEY: ${{ secrets.SIGNING_SECRET_KEY }}
