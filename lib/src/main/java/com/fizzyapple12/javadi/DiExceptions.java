@@ -7,12 +7,17 @@ import java.util.WeakHashMap;
 
 public class DiExceptions {
     public static class InstanceNotFoundException extends RuntimeException {
-        public InstanceNotFoundException(Class<?> searchClass, DiContext context, List<DiRule> rules, WeakHashMap<UUID, Object> objectPool) {
-            System.err.println();
-            System.err.println();
-            System.err.println("Instance not found while resolving " + searchClass.getName());
+        Class<?> searchClass;
+        DiContext context;
+        List<DiRule> rules;
+        WeakHashMap<UUID, Object> objectPool;
 
-            System.err.println("- You might have forgotten to bind() the class before resolving it.");
+        public String toString() {
+            String finalString = "Instance not found while resolving " + searchClass.getName();
+
+            finalString += "\nInstance not found while resolving " + searchClass.getName();
+
+            finalString += "\n- You might have forgotten to bind() the class before resolving it.";
 
             List<Class<?>> values = new ArrayList<>();
             context.memberClass = searchClass;
@@ -32,58 +37,79 @@ public class DiExceptions {
             }
 
             if (values.size() > 0) {
-                System.err.println("- Found " + ((values.size() > 1) ? "classes with similar names: " : "a class with a similar name: "));
+                finalString += "\n- Found " + ((values.size() > 1) ? "classes with similar names: " : "a class with a similar name: ");
 
                 for (Class<?> similarClass : values) {
-                    System.err.println("| - " + similarClass.getName());
+                    finalString += "\n| - " + similarClass.getName();
                 }
 
-                System.err.println("| You might have imported the wrong class.");
+                finalString += "\n| You might have imported the wrong class.";
             }
 
-            System.err.println();
-            System.err.println();
+            return finalString;
+        }
+
+        public InstanceNotFoundException(Class<?> searchClass, DiContext context, List<DiRule> rules, WeakHashMap<UUID, Object> objectPool) {
+            this.searchClass = searchClass;
+            this.context = context;
+            this.rules = rules;
+            this.objectPool = objectPool;
+            
+            System.out.println(this.toString());
         }
     }
     public static class MultipleInstancesFoundException extends RuntimeException {
-        public MultipleInstancesFoundException(Class<?> searchClass, DiContext context, List<DiRule> rules, WeakHashMap<UUID, Object> objectPool) {        
-            System.err.println();
-            System.err.println();
-            System.err.println("Multiple instances found while resolving " + searchClass.getName());
+        Class<?> searchClass;
+        DiContext context;
+        List<DiRule> rules;
+        WeakHashMap<UUID, Object> objectPool;
 
-            System.err.println("- You might have accidentally duplicated a bind() statement");
+        public String toString() {
+            String finalString = "Multiple instances found while resolving " + searchClass.getName();
+
+            finalString += "\n- You might have accidentally duplicated a bind() statement";
 
             if (context.id == null || context.id.isEmpty() || context.id.isBlank()) {
-                System.err.println("- ID is blank, you might have forgotten to bind() with and ID");
+                finalString += "\n- ID is blank, you might have forgotten to bind() with and ID";
             }
 
-            System.err.println();
-            System.err.println();
+            return finalString;
+        }
+
+        public MultipleInstancesFoundException(Class<?> searchClass, DiContext context, List<DiRule> rules, WeakHashMap<UUID, Object> objectPool) {   
+            this.searchClass = searchClass;
+            this.context = context;
+            this.rules = rules;
+            this.objectPool = objectPool;
+            
+            System.out.println(this.toString());
         }
     }
     public static class IncompleteBindingException extends RuntimeException {
-        public IncompleteBindingException(DiRule rule, boolean foundRecursion) {        
-            System.err.println();
-            System.err.println();
+        DiRule rule; 
+        boolean foundRecursion;
+
+        public String toString() {
+            String finalString = "";
 
             switch (rule.retrievalMode) {
                 case Resolve:
                 case Create:
                     if (rule.instanceClass == null) {
-                        System.err.println("An incomplete binding was found");
+                        finalString = "An incomplete binding was found";
                     } else {
-                        System.err.println("An incomplete binding was found for " + rule.instanceClass.getName());
+                        finalString = "An incomplete binding was found for " + rule.instanceClass.getName();
                     }
                     break;
                 case Return:
                     if (rule.targetObject == null) {
-                        System.err.println("An incomplete binding was found");
+                        finalString = "An incomplete binding was found";
                     } else {
-                        System.err.println("An incomplete binding was found for " + rule.targetObject.getClass().getName());
+                        finalString = "An incomplete binding was found for " + rule.targetObject.getClass().getName();
 
                         Object instance = rule.container.objectPool.get(rule.targetObject);
 
-                        if (instance != null) System.err.println("- No instance is set for resolution");
+                        if (instance != null) finalString += "\n- No instance is set for resolution";
                     }
 
                     break;
@@ -91,22 +117,29 @@ public class DiExceptions {
                     break;
             }
 
-            if (foundRecursion) System.err.println("- Found potential recursion in resolution, you may have bound the class to itself");
+            if (foundRecursion) finalString += "\n- Found potential recursion in resolution, you may have bound the class to itself";
 
-            System.err.println();
-            System.err.println();
+            return finalString;
+        }
+
+        public IncompleteBindingException(DiRule rule, boolean foundRecursion) {        
+            this.rule = rule;
+            this.foundRecursion = foundRecursion;
+
+            System.out.println(this.toString());
         }
     }
     public static class RuleBuilderException extends RuntimeException {
+        String reason;
+
+        public String toString() {
+            return "A Rule Builder exception was thrown: \n" + reason;
+        }
+
         public RuleBuilderException(String reason) {        
-            System.err.println();
-            System.err.println();
-            System.err.println("A Rule Builder exception was thrown: ");
-
-            System.err.println(reason);
-
-            System.err.println();
-            System.err.println();
+            this.reason = reason;
+            
+            System.out.println(this.toString());
         }
     }
 }
